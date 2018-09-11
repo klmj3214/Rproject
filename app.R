@@ -14,37 +14,44 @@ library(googledrive)
 
 
 
-ui<-fluidPage(titlePanel("google drive console"),
-              fluidRow(column(4,
-                              wellPanel(actionButton("connect","connect"),
-                                        actionButton("update","update"),
-                                        actionButton("upload","upload"),
-                                        selectInput("selectA","Country",c("US","UK","China")))
-                              ),
-                       column(8,
-                              mainPanel(textInput("term1","Country:",value = ""),
-                                        textInput("term2","facility_code:",value = ""),
-                                        textInput("term3","facility_name:",value = ""),
-                                        textInput("term4","facility_name_local:",value = ""),
-                                        textInput("term5","facility_entity:",value = ""),
-                                        textInput("term6","acute_bed:",value = ""),
-                                        textInput("term7","bed_category:",value = ""),
-                                        textInput("term8","facility_type:",value = ""),
-                                        textInput("term9","facility_ownership:",value = ""),
-                                        textInput("term10","facility_Network:",value = ""),
-                                        textInput("term11","facility_class:",value = ""),
-                                        textInput("term12","City:",value = ""),
-                                        textInput("term13","State:",value = ""),
-                                        textInput("term14","Region:",value = ""),
-                                        textInput("term15","main_cc:",value = ""),
-                                        textInput("term16","main_ac:",value = ""),
-                                        textInput("term17","main_no:",value = ""),
-                                        textInput("term18","main_fcc:",value = ""),
-                                        textInput("term19","main_fac:",value = ""),
-                                        textInput("term20","main_fno:",value = ""),
-                                        verbatimTextOutput('text'),
-                                        tableOutput("table5")))
-                       ))
+textInputRow<-function (inputId, label, value = "") 
+{
+  div(style="display:inline-block",
+      tags$label(label, `for` = inputId), 
+      tags$input(id = inputId, type = "text", value = value,class="input-small"))
+}
+
+
+ui<-dashboardPage(dashboardHeader(title = "google drive console"),
+                  dashboardSidebar(
+                    sidebarMenu(menuItem(actionButton("connect","connect")),
+                                menuItem(actionButton("update","update")),
+                                menuItem(actionButton("upload","upload")),
+                                menuItem(selectInput("selectA","Country",c("US","UK","China")))
+                    )),
+                  dashboardBody(
+                    fluidRow(textInputRow("term1","Country:",value = ""),
+                             textInputRow("term2","facility_code:",value = ""),
+                             textInputRow("term3","facility_name:",value = ""),
+                             textInputRow("term4","facility_name_local:",value = ""),
+                             textInputRow("term5","facility_entity:",value = ""),
+                             textInputRow("term6","acute_bed:",value = ""),
+                             textInputRow("term7","bed_category:",value = ""),
+                             textInputRow("term8","facility_type:",value = ""),
+                             textInputRow("term9","facility_ownership:",value = ""),
+                             textInputRow("term10","facility_Network:",value = ""),
+                             textInputRow("term11","facility_class:",value = ""),
+                             textInputRow("term12","City:",value = ""),
+                             textInputRow("term13","State:",value = ""),
+                             textInputRow("term14","Region:",value = ""),
+                             textInputRow("term15","main_cc:",value = ""),
+                             textInputRow("term16","main_ac:",value = ""),
+                             textInputRow("term17","main_no:",value = ""),
+                             textInputRow("term18","main_fcc:",value = ""),
+                             textInputRow("term19","main_fac:",value = ""),
+                             textInputRow("term20","main_fno:",value = ""),
+                             tableOutput("table5")))
+)
 
 
 server<-function(input,output){
