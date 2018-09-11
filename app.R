@@ -46,6 +46,7 @@ ui<-fluidPage(titlePanel("update data"),
                                         tableOutput("table5")))
                        ))
 
+
 server<-function(input,output){
   
   observeEvent(input$connect, {
@@ -67,10 +68,12 @@ server<-function(input,output){
   
   
   observeEvent(input$upload,{
-    drive_upload("test.csv", name = paste("test",Sys.time()),type='spreadsheet')
+    drive_rm("test.xlsx")
+    drive_upload("test.xlsx", name ="test.xlsx",type='xlsx')
+    file.remove("test.xlsx")
   })
   }
 
 
-
 shinyApp(ui, server)
+
