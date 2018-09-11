@@ -1,4 +1,4 @@
-setwd("C:/Users/walt.chen/Desktop/other")
+
 install.packages("shiny")
 install.packages("shinydashboard")
 install.packages("data.table")
