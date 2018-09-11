@@ -14,7 +14,7 @@ library(googledrive)
 
 
 
-ui<-fluidPage(titlePanel("update data"),
+ui<-fluidPage(titlePanel("google drive console"),
               fluidRow(column(4,
                               wellPanel(actionButton("connect","connect"),
                                         actionButton("update","update"),
@@ -50,6 +50,7 @@ ui<-fluidPage(titlePanel("update data"),
 server<-function(input,output){
   
   observeEvent(input$connect, {
+    drive_auth()
     drive_find()
     drive_download("test.xlsx")
   })
